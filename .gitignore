@@ -1,3 +1,4 @@
+.gitignore
 *.txt
 *.bin
 __pycache__
