@@ -1,5 +1,5 @@
 
-TLB_SIZE = 16
+TLB_SIZE = 16 
 PAGE_SIZE = 256
 LOGICAL_ADDRESS = 0xFFFF
 PAGE_NUMBER_OFFSET = 8
@@ -7,6 +7,7 @@ PAGE_OFFSET_OFFSET = 0xFF
 
 victim_frame = 0
 lru_frame = 0
+hit_print = {}
 
 def extract_page(logical_addr): 
     #Extract Page elements. Page consiste of page number and page offset
@@ -76,8 +77,9 @@ def pfault_handler(addr, pnum,poff, ptable, ph_mem, tlb, pra, lru_container):
 
     if not replaceflag and pra == "lru" :
         lru_container.append(frame_num)
-    frame_vs_page(frame_num ,pnum) 
-    #print("{}, {}, {}, {}".format(addr, value, frame_num, readb.upper()))
+    #frame_vs_page(frame_num ,pnum) 
+    hit_print[pnum] = (value, frame_num, readb.upper()) 
+    print("{}, {}, {}, {}".format(addr, value, frame_num, readb.upper()))
 
 
 def frame_vs_page(frame_num , page_num):
@@ -162,7 +164,7 @@ def fifo_handler(fn,pnum, ptable, ph_mem, tlb):
 
 
 def tlb_update(pnum, ptable, tlb):
+    tlb[pnum] = ptable[pnum]
     if len(tlb) > TLB_SIZE:
         first_key = next(iter(tlb))
         tlb.pop(first_key)
-    tlb[pnum] = ptable[pnum]

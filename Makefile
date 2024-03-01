@@ -25,6 +25,12 @@ lru2:
 
 lru3:
 	@python3 main.py test/lru3.txt 3 lru
+
+opt1:
+	@python3 main.py test/opt1.txt 5 opt
+
+opt2:
+	@python3 main.py test/opt2.txt 5 opt
 	
  
 args:

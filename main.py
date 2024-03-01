@@ -42,18 +42,16 @@ with open(FILENAME, 'r') as file:
         pnum = page[0]
         poff = page[1]
         if pnum in tlb:
-            print("tlb hit")
-            #print(ptable[pnum])
-            #print(lru_container)
+            temp = util.hit_print[pnum]
+            print("{}, {}, {}, {}".format(int(addr), temp[0], temp[1], temp[2]))
             tlbcount+=1
 
-            util.lru_modify(1, ptable[pnum],lru_container,0)
+            if PRA == "lru":
+                util.lru_modify(1, ptable[pnum],lru_container,0)
             continue
         elif ptable[pnum] != -1:
             print("ptable hit")
-            print(tlb)
             util.tlb_update(pnum, ptable, tlb)
-            print(tlb)
             ptablecount+=1
             continue
         else: 
