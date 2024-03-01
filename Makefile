@@ -16,6 +16,16 @@ fifo4:
 
 fifo5:
 	@python3 main.py test/fifo5.txt 8 fifo
+
+lru1:
+	@python3 main.py test/lru1.txt 5 lru
+
+lru2:
+	@python3 main.py test/lru2.txt 5 lru
+
+lru3:
+	@python3 main.py test/lru3.txt 3 lru
+	
  
 args:
 	@python3 main.py addresses.txt 5 fifo
